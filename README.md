@@ -56,3 +56,4 @@ This is a project for all homeworks for AQA Training 4.0
 7. After you finished assignment compilation should be without any errors (`Ctrl+F9` or `Command + F9`).
 8. Do the task =) 
 # java-training-4.0
+- New line
