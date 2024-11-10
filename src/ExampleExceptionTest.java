@@ -45,9 +45,9 @@ public class ExampleExceptionTest {
     }
 
 
-    @Test(dataProvider = "negativeData")
+    @Test(dataProvider = "negativeData", expectedExceptions = IllegalArgumentException.class)
     public void testRectangleAreaNegative(int a, int b) {
-        // TODO put your code here
+        // put your code here
         try {
             ExampleException.rectangleArea(a, b);
         } catch (IllegalArgumentException e) {
