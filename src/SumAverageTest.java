@@ -17,8 +17,10 @@ public class SumAverageTest {
         return new Object[][]{
                 {1, 100, 5050},
                 {-100, 100, 0},
-                {1, 1, 1}
-                // TODO add 2 more test data here
+                {1, 1, 1},
+                {-50, 0, -1275},
+                {5, 16, 126}
+                // add 2 more test data here
         };
     }
 
@@ -32,8 +34,11 @@ public class SumAverageTest {
         return new Object[][]{
                 {1, 100, 50.5},
                 {-100, 100, 0.0},
-                {1, 1, 1.0}
-                // TODO add 2 more test data here
+                {1, 1, 1.0},
+                {4, 8, 6.0},
+                {20, 66, 43.0},
+                {1, 10, 5.5}
+                // add 2 more test data here
         };
     }
 
