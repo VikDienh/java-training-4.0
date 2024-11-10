@@ -21,8 +21,10 @@ public class RegExpTest {
                 {" Invalid IP: 256.256.256.256!", ""},
                 {"invalid:256.256.256.256", ""},
                 {"valid IP: 255.255.255.255!", "255.255.255.255"},
-                {"invalid:255.255.255.255", "255.255.255.255"}
-                // TODO add 2 more test data here
+                {"invalid:255.255.255.255", "255.255.255.255"},
+                // add 2 more test data here
+                {"IP just outside range: 255.255.255.256", ""},
+                {"String with no IP address in it", ""},
         };
     }
 
