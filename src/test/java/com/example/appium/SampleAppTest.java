@@ -1,7 +1,6 @@
 package com.example.appium;
 
 import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.InteractsWithApps;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
 import io.appium.java_client.ios.IOSDriver;
@@ -15,7 +14,6 @@ import org.testng.annotations.Test;
 
 import java.nio.file.Paths;
 
-import static io.appium.java_client.service.local.flags.GeneralServerFlag.BASEPATH;
 import static java.lang.System.getenv;
 
 public class SampleAppTest {
@@ -32,15 +30,13 @@ public class SampleAppTest {
             var options = new UiAutomator2Options()
                     .setPlatformName("Android")
                     .setDeviceName("emulator-5554")
-                    .setApp(Paths.get(path).resolve("ApiDemos-debug.apk").toString());
+                    .setApp(Paths.get(path).resolve("ApiDemos-debug.apk").toString())
+                    .setAppActivity(".view.TextFields");
 
-            server = AppiumDriverLocalService.buildService(new AppiumServiceBuilder().usingPort(4723).withArgument(BASEPATH, "/")
-                    .withIPAddress("127.0.0.1"));
+            server = AppiumDriverLocalService.buildService(new AppiumServiceBuilder().usingAnyFreePort());
             server.start();
             driver = new AndroidDriver(server, options);
-
-            ((InteractsWithApps) driver).activateApp("io.appium.android.apis");
-        } else if (platform.equals("IOS")) {
+        } else {
             var options = new XCUITestOptions()
                     .setPlatformName("iOS")
                     .setPlatformVersion("18.1")
@@ -49,8 +45,7 @@ public class SampleAppTest {
                     .setUdid("F4C549C8-23CE-4EB5-9DB7-92BE893BCE60")
                     .setApp(Paths.get(path).resolve("TestApp.app.zip").toString());
 
-            server = AppiumDriverLocalService.buildService(new AppiumServiceBuilder().usingPort(4723).withArgument(BASEPATH, "/")
-                    .withIPAddress("127.0.0.1"));
+            server = AppiumDriverLocalService.buildService(new AppiumServiceBuilder().usingAnyFreePort());
             server.start();
             driver = new IOSDriver(server, options);
         }
@@ -59,11 +54,13 @@ public class SampleAppTest {
     @Test
     public void textFieldTest() {
         // initialise PageView and set "text" to its textField
-        PageView view = new PageView(driver);
-        view.navigateToTextFieldScreen().setTextField("test");
+        PageView pageView = new PageView(driver);
+
+        String inputText = "text";
+        pageView.setTextField(inputText);
 
         // assert that textField equals to "text"
-        Assert.assertEquals(view.getTextField(), "test", "Text field was not set");
+        Assert.assertEquals(pageView.getTextField(), inputText, "Text field was not set");
     }
 
     @AfterClass
